@@ -67,7 +67,7 @@ export default function Navbar() {
               </Link>
             </div>
 
-            {/* Mobile Hamburger Button Trigger - cursor-pointer added */}
+            {/* Mobile Hamburger Button Trigger */}
             <button 
               onClick={() => setIsOpen(!isOpen)}
               className="lg:hidden p-2 text-zinc-300 hover:text-white focus:outline-none transition-colors duration-200 z-50 cursor-pointer"
@@ -90,20 +90,14 @@ export default function Navbar() {
 
       {/* 2. Mobile Responsive Dropdown Slide Panel Layout */}
       <div className={`fixed inset-0 z-40 lg:hidden transition-opacity duration-300 ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
-        {/* Soft Background Blur Overlay */}
         <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsOpen(false)} />
-        
-        {/* Dropdown Menu Block Content Panel */}
         <div className={`absolute top-[100px] left-0 w-full bg-[#130620] border-b border-purple-500/10 p-6 flex flex-col gap-5 transform transition-transform duration-300 ${isOpen ? "translate-y-0" : "-translate-y-full"}`}>
           <Link href="/" onClick={() => setIsOpen(false)} className="text-[#A71EDB] text-lg font-medium tracking-wide">Home</Link>
           <Link href="#about" onClick={() => setIsOpen(false)} className="text-zinc-300 text-lg font-normal tracking-wide">About Us</Link>
           <Link href="#repair" onClick={() => setIsOpen(false)} className="text-zinc-300 text-lg font-normal tracking-wide">Repair & Services</Link>
           <Link href="#products" onClick={() => setIsOpen(false)} className="text-zinc-300 text-lg font-normal tracking-wide">Products</Link>
           <Link href="#blogs" onClick={() => setIsOpen(false)} className="text-zinc-300 text-lg font-normal tracking-wide">Blogs</Link>
-          
           <div className="h-[1px] bg-zinc-800 my-1" />
-          
-          {/* Mobile Profile Sign In */}
           <Link href="/signin" onClick={() => setIsOpen(false)} className="flex items-center gap-2 text-zinc-300 text-lg font-normal">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="w-5 h-5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />

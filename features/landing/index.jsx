@@ -4,6 +4,7 @@ import AboutSection from './components/AboutSection';
 import ProductsSection from './components/ProductsSection';
 import BlogsSection from './components/BlogsSection';
 import RepairSection from './components/RepairSection';
+import FeaturesSection from './components/FeaturesSection';
 
 
 export default function LandingPage() {
@@ -11,6 +12,7 @@ export default function LandingPage() {
     <>
     <HeroSection />
       <AboutSection />
+      <FeaturesSection />
       <ProductsSection />
       <BlogsSection />
       <RepairSection />
