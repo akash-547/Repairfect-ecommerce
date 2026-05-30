@@ -30,3 +30,28 @@ export const PRODUCTS_DATA = [
     imageSrc: "/assets/cardimage.png",
   },
 ];
+
+// Blogs Data
+export const BLOGS_DATA = [
+  {
+    id: 1,
+    title: "How Custom Controller Mods Transform Your Gameplay",
+    description: "Figma ipsum component variant main layer. Share bold resizing style image star effect project..",
+    date: "19 Mar 2026",
+    image: "/assets/blog.png" // Apne actual image asset ka path yahan dein
+  },
+  {
+    id: 2,
+    title: "How Custom Controller Mods Transform Your Gameplay",
+    description: "Figma ipsum component variant main layer. Share bold resizing style image star effect project..",
+    date: "19 Mar 2026",
+    image: "/assets/blog.png"
+  },
+  {
+    id: 3,
+    title: "How Custom Controller Mods Transform Your Gameplay",
+    description: "Figma ipsum component variant main layer. Share bold resizing style image star effect project..",
+    date: "19 Mar 2026",
+    image: "/assets/blog.png"
+  }
+];
