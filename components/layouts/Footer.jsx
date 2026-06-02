@@ -67,7 +67,7 @@ export default function Footer() {
                   required
                 />
                 <button type="submit" className="text-zinc-400 hover:text-white transition-colors absolute right-0 bottom-2">
-                  <span className="text-[16px]">➔</span>
+                  <span className="text-[16px] cursor-pointer">➔</span>
                 </button>
               </form>
             </div>

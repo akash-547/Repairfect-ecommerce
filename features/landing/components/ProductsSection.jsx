@@ -3,12 +3,13 @@
 import { useState } from "react";
 import Container from "@/components/shared/Container";
 import ProductCard from "@/components/ui/ProductCard";
-import SectionBadge from "@/components/ui/SectionBadge"; // 👈 Naya reusable component
-import PrimaryButton from "@/components/ui/PrimaryButton"; // 👈 Naya reusable component
+import SectionBadge from "@/components/ui/SectionBadge"; 
+import PrimaryButton from "@/components/ui/PrimaryButton"; 
 import { PRODUCTS_DATA } from "@/constants";
 
 export default function DiscoverProductsSection() {
-  const [activeCardId, setActiveCardId] = useState(11);
+  // 🛠️ FIX: Pehle se default kisi card ko active rakhne ke bajaye initial state null rakhi hai
+  const [hoveredCardId, setHoveredCardId] = useState(null);
 
   const fixedTwelveProducts = Array.from({ length: 12 }, (_, index) => {
     const originalProduct = PRODUCTS_DATA[index % PRODUCTS_DATA.length];
@@ -22,7 +23,7 @@ export default function DiscoverProductsSection() {
         {/* 1. Top Header using Reusable Badge */}
         <div className="w-full flex flex-col items-center text-center mb-16">
           <div className="mb-4">
-            <SectionBadge text="All Products" /> {/* ◄ clean logic! */}
+            <SectionBadge text="All Products" />
           </div>
 
           <h2 className="font-inter font-normal text-3xl sm:text-4xl lg:text-[40px] leading-[120%] text-white tracking-wide">
@@ -33,12 +34,22 @@ export default function DiscoverProductsSection() {
         {/* 2. Grid Container */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10 justify-center max-w-[1200px] mx-auto px-4">
           {fixedTwelveProducts.map((product) => (
-            <ProductCard 
-              key={product.id} 
-              product={product} 
-              isActive={activeCardId === product.id}
-              onCardClick={() => setActiveCardId(product.id)}
-            />
+            <div
+              key={product.id}
+              // Hover dynamic lagane ke liye wrapper mouse events
+              onMouseEnter={() => setHoveredCardId(product.id)}
+              onMouseLeave={() => setHoveredCardId(null)}
+              className="w-full"
+            >
+              {/* 🛠️ FIX: 'isActive' ab sirf mouse hover par trigger hoga. Click karne par permanent active color nahi bachega */}
+              <ProductCard 
+                product={product} 
+                isActive={hoveredCardId === product.id}
+                onCardClick={() => {
+                  // Agar click par koi specific behavior chahiye toh yahan add kar sakte hain, abhi yeh card ko toggle ya permanent select nahi karega
+                }}
+              />
+            </div>
           ))}
         </div>
 
@@ -46,7 +57,7 @@ export default function DiscoverProductsSection() {
         <div className="w-full flex justify-center mt-16">
           <PrimaryButton>
             Discover All products
-          </PrimaryButton> {/* ◄ Clean logic! */}
+          </PrimaryButton>
         </div>
 
       </Container>

@@ -9,10 +9,9 @@ export default function Navbar() {
 
   return (
     <>
-      {/* 1. Main Navbar Header Block (Exactly 100px Height, Solid Black Background) */}
+      {/* 1. Main Navbar Header Block */}
       <nav className="w-full h-[100px] bg-[#000000] pt-6 z-50 flex items-center shadow-none select-none relative">
         <Container>
-          {/* max-w-[1200px] aligned. Mobile par justify-between aur desktop par justify-start layout */}
           <div className="max-w-[1200px] mx-auto flex items-center justify-between lg:justify-start px-4 w-full">
             
             {/* Brand Logo */}
@@ -27,38 +26,43 @@ export default function Navbar() {
               />
             </Link>
 
-            {/* Desktop View Elements - Hidden on mobile, visible on desktop (lg) matching your exact 248px space */}
+            {/* Desktop View Elements */}
             <div className="hidden lg:flex items-center gap-[22px] ml-[248px]">
               
               {/* Center Navigation Pill */}
               <div className="flex items-center bg-[#130620]/80 backdrop-blur-xl rounded-md border border-purple-500/10 shadow-[0_4px_20px_rgba(0,0,0,0.4)] pt-[15px] pb-[15px] pl-[28px] pr-[28px] gap-[46px]">
-                <Link href="/" className="text-[#A71EDB] font-normal transition-colors text-[16px] leading-[100%] tracking-[0%]">
+                <Link href="/" className="text-zinc-300 hover:text-[#A71EDB] font-normal transition-colors text-[16px] leading-[100%] tracking-[0%]">
                   Home
                 </Link>
-                <Link href="#about" className="text-zinc-300 hover:text-white font-normal transition-colors text-[16px] leading-[100%] tracking-[0%]">
+                
+                <Link href="/about" className="text-zinc-300 hover:text-[#A71EDB] font-normal transition-colors text-[16px] leading-[100%] tracking-[0%]">
                   About Us
                 </Link>
-                <Link href="#repair" className="text-zinc-300 hover:text-white font-normal transition-colors text-[16px] leading-[100%] tracking-[0%]">
+                
+                {/* 🛠️ FIXED: Added '/' before anchors for multi-page safe routing */}
+                <Link href="/#repair" className="text-zinc-300 hover:text-[#A71EDB] font-normal transition-colors text-[16px] leading-[100%] tracking-[0%]">
                   Repair & Services
                 </Link>
-                <Link href="#products" className="text-zinc-300 hover:text-white font-normal transition-colors text-[16px] leading-[100%] tracking-[0%]">
+                
+                <Link href="/#products" className="text-zinc-300 hover:text-[#A71EDB] font-normal transition-colors text-[16px] leading-[100%] tracking-[0%]">
                   Products
                 </Link>
-                <Link href="#blogs" className="text-zinc-300 hover:text-white font-normal transition-colors text-[16px] leading-[100%] tracking-[0%]">
+                
+                <Link href="/#blogs" className="text-zinc-300 hover:text-[#A71EDB] font-normal transition-colors text-[16px] leading-[100%] tracking-[0%]">
                   Blogs
                 </Link>
               </div>
 
               {/* Profile Sign In */}
-              <Link href="/signin" className="flex items-center gap-2 text-zinc-300 hover:text-white text-[16px] font-normal leading-none transition-all group active:scale-95 shrink-0">
-                <div className="p-0.5 rounded-full border border-zinc-700 group-hover:border-zinc-400 transition-colors">
+              <Link href="/signin" className="flex items-center gap-2 text-zinc-300 hover:text-[#A71EDB] text-[16px] font-normal leading-none transition-all group active:scale-95 shrink-0">
+                <div className="flex items-center justify-center transition-colors">
                   <svg 
                     xmlns="http://www.w3.org/2000/svg" 
                     fill="none" 
                     viewBox="0 0 24 24" 
-                    strokeWidth={1.8} 
+                    strokeWidth={1.5} 
                     stroke="currentColor" 
-                    className="w-4 h-4"
+                    className="w-[20px] h-[20px]"
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                   </svg>
@@ -92,14 +96,22 @@ export default function Navbar() {
       <div className={`fixed inset-0 z-40 lg:hidden transition-opacity duration-300 ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
         <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsOpen(false)} />
         <div className={`absolute top-[100px] left-0 w-full bg-[#130620] border-b border-purple-500/10 p-6 flex flex-col gap-5 transform transition-transform duration-300 ${isOpen ? "translate-y-0" : "-translate-y-full"}`}>
-          <Link href="/" onClick={() => setIsOpen(false)} className="text-[#A71EDB] text-lg font-medium tracking-wide">Home</Link>
-          <Link href="#about" onClick={() => setIsOpen(false)} className="text-zinc-300 text-lg font-normal tracking-wide">About Us</Link>
-          <Link href="#repair" onClick={() => setIsOpen(false)} className="text-zinc-300 text-lg font-normal tracking-wide">Repair & Services</Link>
-          <Link href="#products" onClick={() => setIsOpen(false)} className="text-zinc-300 text-lg font-normal tracking-wide">Products</Link>
-          <Link href="#blogs" onClick={() => setIsOpen(false)} className="text-zinc-300 text-lg font-normal tracking-wide">Blogs</Link>
+          
+          <Link href="/" onClick={() => setIsOpen(false)} className="text-zinc-300 hover:text-[#A71EDB] text-lg font-medium tracking-wide transition-colors">Home</Link>
+          
+          <Link href="/about" onClick={() => setIsOpen(false)} className="text-zinc-300 hover:text-[#A71EDB] text-lg font-normal tracking-wide transition-colors">About Us</Link>
+          
+          {/* 🛠 dependency fix for mobile anchor tags */}
+          <Link href="/#repair" onClick={() => setIsOpen(false)} className="text-zinc-300 hover:text-[#A71EDB] text-lg font-normal tracking-wide transition-colors">Repair & Services</Link>
+          
+          <Link href="/#products" onClick={() => setIsOpen(false)} className="text-zinc-300 hover:text-[#A71EDB] text-lg font-normal tracking-wide transition-colors">Products</Link>
+          
+          <Link href="/#blogs" onClick={() => setIsOpen(false)} className="text-zinc-300 hover:text-[#A71EDB] text-lg font-normal tracking-wide transition-colors">Blogs</Link>
+          
           <div className="h-[1px] bg-zinc-800 my-1" />
-          <Link href="/signin" onClick={() => setIsOpen(false)} className="flex items-center gap-2 text-zinc-300 text-lg font-normal">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="w-5 h-5">
+          
+          <Link href="/signin" onClick={() => setIsOpen(false)} className="flex items-center gap-2 text-zinc-300 hover:text-[#A71EDB] text-lg font-normal transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
             </svg>
             Sign In
