@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import Image from "next/image";
 import Container from "@/components/shared/Container";
@@ -7,41 +6,44 @@ import SectionBadge from "@/components/ui/SectionBadge";
 
 const AboutSection = () => {
   return (
-    <section className="w-full bg-[#000000] text-white py-16 lg:py-24 select-none overflow-hidden block">
+    <section className="w-full bg-[#000000] text-white py-16 lg:py-24 select-none overflow-hidden">
       <Container>
-        {/* ─── PURE TABLE/GRID LAYOUT FOR STATIC DIRECTION ─── */}
-        <div className="px-4 grid grid-cols-1 lg:grid-cols-2  items-center w-full">
-          {/* ─── LEFT COLUMN: IMAGE BLOCK (LOCK HEIGHT & WIDTH) ─── */}
-          <div className="w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
+
+          {/* LEFT — Image, fills its grid column, made significantly larger */}
+          <div className="w-full h-[540px] lg:h-[620px] rounded-[16px] overflow-hidden bg-zinc-900 relative">
             <Image
               src="/assets/aboutPro.png"
               alt="Mohannad Saddedin Portrait"
-              // fill
+              fill
               priority
-              // sizes="(max-width: 1024px) 100vw, 520px"
-              width={500}
-              height={500}
-              className="object-cover object-center z-10"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover object-center"
+            />
+            {/* Purple glow overlay — matches screenshot */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(167,30,219,0.55) 0%, rgba(80,0,120,0.35) 100%)",
+                mixBlendMode: "multiply",
+              }}
             />
           </div>
 
-          {/* ─── RIGHT COLUMN: CONTENT TEXT BLOCK ─── */}
+          {/* RIGHT — Content */}
           <div className="w-full flex flex-col items-start text-left">
-            <div className="mb-6 block">
+            <div className="mb-6">
               <SectionBadge text="About Owner" />
             </div>
 
-            {/* 🛠️ HEADING UPDATED: */}
-            <h1 className="font-inter font-normal text-[100px] sm:text-[56px] lg:text-[64px] tracking-normal text-white mb-8 max-w-[700px] flex flex-col gap-2 sm:gap-3">
-              <span>Biography of</span>
-              <span>Mohannad Saddedin</span>
+            {/* Reasonable heading size, no overflow */}
+            <h1 className="font-inter font-normal text-[36px] sm:text-[44px] lg:text-[48px] leading-[115%] tracking-tight text-white mb-8 max-w-[500px]">
+              Biography of<br />Mohannad Saddedin
             </h1>
 
             <div className="flex flex-col gap-6 w-full max-w-[540px]">
-              <p
-                className="font-inter font-normal text-[16px] leading-[22px] tracking-[0%] text-zinc-400 block"
-                style={{ fontStyle: "normal" }}
-              >
+              <p className="font-inter font-normal text-[16px] leading-[22px] tracking-[0%] text-zinc-400">
                 Figma ipsum component variant main layer. Hand boolean edit
                 share inspect main layout vertical boolean. Pen effect vertical
                 rectangle distribute team. Invite export frame undo community
@@ -56,10 +58,7 @@ const AboutSection = () => {
                 underline.
               </p>
 
-              <p
-                className="font-inter font-normal text-[16px] leading-[22px] tracking-[0%] text-zinc-500 block"
-                style={{ fontStyle: "normal" }}
-              >
+              <p className="font-inter font-normal text-[16px] leading-[22px] tracking-[0%] text-zinc-500">
                 Vertical boolean align align mask style. Edit background hand
                 draft figjam selection move draft select object. Library
                 scrolling fill variant draft device arrange text plugin. Move
@@ -68,7 +67,9 @@ const AboutSection = () => {
               </p>
             </div>
           </div>
+
         </div>
+        
       </Container>
     </section>
   );
