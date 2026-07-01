@@ -40,7 +40,7 @@ export default function Navbar() {
                 </Link>
                 
                 {/* 🛠️ FIXED: Added '/' before anchors for multi-page safe routing */}
-                <Link href="/#repair" className="text-zinc-300 hover:text-[#A71EDB] font-normal transition-colors text-[16px] leading-[100%] tracking-[0%]">
+                <Link href="/repair" className="text-zinc-300 hover:text-[#A71EDB] font-normal transition-colors text-[16px] leading-[100%] tracking-[0%]">
                   Repair & Services
                 </Link>
                 
