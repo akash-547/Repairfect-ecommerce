@@ -44,7 +44,7 @@ export default function Navbar() {
                   Repair & Services
                 </Link>
                 
-                <Link href="/#products" className="text-zinc-300 hover:text-[#A71EDB] font-normal transition-colors text-[16px] leading-[100%] tracking-[0%]">
+                <Link href="/products" className="text-zinc-300 hover:text-[#A71EDB] font-normal transition-colors text-[16px] leading-[100%] tracking-[0%]">
                   Products
                 </Link>
                 
