@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
+import Blogs from "@/features/blogs";
 
-const page = () => {
-  return (
-    <div>
-      
-    </div>
-  )
+export const metadata = {
+  title: "Repairfect - Blogs",
+  description: "Read our latest custom controller mods and updates.",
+};
+
+export default function BlogsPage() {
+  return <Blogs />;
 }
-
-export default page
