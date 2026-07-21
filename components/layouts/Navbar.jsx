@@ -48,7 +48,7 @@ export default function Navbar() {
                   Products
                 </Link>
                 
-                <Link href="/#blogs" className="text-zinc-300 hover:text-[#A71EDB] font-normal transition-colors text-[16px] leading-[100%] tracking-[0%]">
+                <Link href="/blogs" className="text-zinc-300 hover:text-[#A71EDB] font-normal transition-colors text-[16px] leading-[100%] tracking-[0%]">
                   Blogs
                 </Link>
               </div>
