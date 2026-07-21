@@ -48,7 +48,8 @@ export default function BlogsFeature() {
 
       {/* Shared Container with Navbar alignment setup */}
       <Container>
-        <div className="max-w-[1200px] mx-auto px-4 w-full -mt-12 relative z-10 flex flex-col items-center text-center">
+        {/* 🛠️ FIXED: Removed -mt-12 and added mt-[40px] for clean spacing */}
+        <div className="max-w-[1200px] mx-auto px-4 w-full mt-[40px] relative z-10 flex flex-col items-center text-center">
           
           {/* Section Badge */}
           <SectionBadge text="Blogs" />
@@ -59,7 +60,7 @@ export default function BlogsFeature() {
           </h1>
 
           {/* Subtitle Paragraph */}
-          <p className="font-inter font-light text-[12px] sm:text-[14px] leading-[150%] text-zinc-500 max-w-[680px] mb-10 opacity-80">
+          <p className="font-inter font-light text-[12px] sm:text-[12px] leading-[150%] text-zinc-500 max-w-[680px] mb-10 opacity-80">
             Figma ipsum component variant main layer. Hand boolean edit share element
             main layout vertical boolean. Pen effect vertical rectangle distribute
             basic. Icon export frame undo continuity undo arrow.
