@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Container from "@/components/shared/Container";
 import ProductCard from "@/components/ui/ProductCard";
 import SectionBadge from "@/components/ui/SectionBadge"; 
@@ -8,8 +9,8 @@ import PrimaryButton from "@/components/ui/PrimaryButton";
 import { PRODUCTS_DATA } from "@/constants";
 
 export default function DiscoverProductsSection() {
-  // 🛠️ FIX: Pehle se default kisi card ko active rakhne ke bajaye initial state null rakhi hai
   const [hoveredCardId, setHoveredCardId] = useState(null);
+  const router = useRouter();
 
   const fixedTwelveProducts = Array.from({ length: 12 }, (_, index) => {
     const originalProduct = PRODUCTS_DATA[index % PRODUCTS_DATA.length];
@@ -20,7 +21,7 @@ export default function DiscoverProductsSection() {
     <section className="w-full py-20 select-none bg-[#000000] text-white">
       <Container>
         
-        {/* 1. Top Header using Reusable Badge */}
+        {/* 1. Top Header */}
         <div className="w-full flex flex-col items-center text-center mb-16">
           <div className="mb-4">
             <SectionBadge text="All Products" />
@@ -36,26 +37,24 @@ export default function DiscoverProductsSection() {
           {fixedTwelveProducts.map((product) => (
             <div
               key={product.id}
-              // Hover dynamic lagane ke liye wrapper mouse events
               onMouseEnter={() => setHoveredCardId(product.id)}
               onMouseLeave={() => setHoveredCardId(null)}
               className="w-full"
             >
-              {/* 🛠️ FIX: 'isActive' ab sirf mouse hover par trigger hoga. Click karne par permanent active color nahi bachega */}
               <ProductCard 
                 product={product} 
                 isActive={hoveredCardId === product.id}
                 onCardClick={() => {
-                  // Agar click par koi specific behavior chahiye toh yahan add kar sakte hain, abhi yeh card ko toggle ya permanent select nahi karega
+                  router.push(`/products/${product.id}`);
                 }}
               />
             </div>
           ))}
         </div>
 
-        {/* 3. Bottom Centered Reusable Button */}
+        {/* 3. Bottom Button */}
         <div className="w-full flex justify-center mt-16">
-          <PrimaryButton>
+          <PrimaryButton onClick={() => router.push("/products")}>
             Discover All products
           </PrimaryButton>
         </div>
