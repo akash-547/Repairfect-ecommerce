@@ -12,7 +12,7 @@ export default async function ProductDetailPage({ params }) {
     PRODUCTS_DATA[0];
 
   return (
-    <main className="min-h-screen bg-[#05010B] text-white py-12 px-4 md:px-8 relative overflow-hidden">
+    <main className="min-h-screen bg-[#05010B] text-white py-20 px-4 md:px-8 relative overflow-hidden">
       {/* 🌟 Screen ke bottom se spread hone wala Purple Glow */}
       <div 
         className="absolute inset-x-0 bottom-0 h-[600px] pointer-events-none z-0" 
@@ -35,9 +35,6 @@ export default async function ProductDetailPage({ params }) {
 
         {/* Bottom Section: Featured Products (4 Cards) */}
         <div className="pt-12 border-t border-purple-900/20">
-          <h2 className="text-3xl font-inter font-normal text-white mb-8">
-            Featured Products
-          </h2>
           <FeaturedProducts currentId={product.id} />
         </div>
       </div>

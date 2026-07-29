@@ -1,47 +1,54 @@
 "use client";
+
 import { useState } from "react";
 
 export default function ProductDetails({ product }) {
-  const defaultColor = product?.colors?.[0] || "Black";
+  const defaultColor = product?.colors?.[0] || "White";
   const [selectedColor, setSelectedColor] = useState(defaultColor);
 
   return (
-    <div className="space-y-6 select-none">
-      <div>
-        <span className="text-xs uppercase tracking-widest text-zinc-400 font-medium">
-          {product?.category || "ACCESSORY"}
-        </span>
-        <div className="flex items-center justify-between gap-2 mt-1">
-          <h1 className="text-2xl md:text-3xl font-bold">{product?.title}</h1>
-          <span className="text-xs text-emerald-400 shrink-0 font-medium">
-            {product?.availability || "In Stock"}
+    <div className="flex flex-col justify-between h-[705px] w-full select-none bg-transparent py-2 px-3">
+      {/* Details Container */}
+      <div className="space-y-6 overflow-y-auto pr-2 custom-scrollbar">
+        {/* Title & Availability */}
+        <div>
+          <span className="text-xs uppercase tracking-widest text-purple-400/90 font-medium">
+            {product?.category || "CONTROLLER"}
           </span>
+          <div className="flex items-center justify-between gap-3 mt-1">
+            <h1 className="text-3xl md:text-4xl font-bold text-white tracking-wide">
+              {product?.title || "The X-Force Elite Controller"}
+            </h1>
+            <span className="text-xs text-emerald-400 shrink-0 font-medium px-3 py-1 rounded-full bg-emerald-950/30 border border-emerald-500/20">
+              {product?.availability || "Available in stock"}
+            </span>
+          </div>
         </div>
-      </div>
 
-      {/* Description */}
-      <div>
-        <h3 className="text-sm font-semibold text-zinc-300 mb-1">
-          Description
-        </h3>
-        <p className="text-sm text-zinc-400 leading-relaxed">
-          {product?.detailedDescription || product?.description}
-        </p>
-      </div>
+        {/* Description */}
+        <div>
+          <h3 className="text-sm font-semibold text-zinc-300 mb-1.5">
+            Description
+          </h3>
+          <p className="text-sm text-zinc-400 leading-relaxed font-light">
+            {product?.detailedDescription ||
+              product?.description ||
+              "Engineered for precision, the X-Force Elite Controller is built for players who demand dominance, speed, and flawless control."}
+          </p>
+        </div>
 
-      {/* Color Selection */}
-      {product?.colors?.length > 0 && (
+        {/* Color Options */}
         <div>
           <h3 className="text-sm font-semibold text-zinc-300 mb-2">Color</h3>
           <div className="flex gap-3">
-            {product.colors.map((color) => (
+            {["White", "Black"].map((color) => (
               <button
                 key={color}
                 onClick={() => setSelectedColor(color)}
-                className={`px-6 py-2 text-sm rounded-md border transition-all cursor-pointer ${
+                className={`px-6 py-2 text-xs rounded-xl border transition-all duration-200 cursor-pointer ${
                   selectedColor === color
-                    ? "border-[#A71EDB] bg-[#A71EDB]/10 text-white font-medium"
-                    : "border-zinc-800 text-zinc-400 hover:border-zinc-700"
+                    ? "border-purple-500/40 bg-purple-950/40 text-white font-medium"
+                    : "border-zinc-800/80 text-zinc-400 hover:border-purple-500/20 hover:bg-purple-950/20 hover:text-white"
                 }`}
               >
                 {color}
@@ -49,40 +56,41 @@ export default function ProductDetails({ product }) {
             ))}
           </div>
         </div>
-      )}
 
-      {/* Product Specifications */}
-      {product?.specifications?.length > 0 && (
+        {/* Specifications */}
         <div>
-          <h3 className="text-sm font-semibold text-zinc-300 mb-2">
+          <h3 className="text-sm font-semibold text-zinc-300 mb-1.5">
             Product Specifications
           </h3>
-          <ul className="list-disc list-inside text-sm text-zinc-400 space-y-1">
-            {product.specifications.map((spec, idx) => (
-              <li key={idx}>{spec}</li>
-            ))}
+          <ul className="list-disc list-inside text-sm text-zinc-400 space-y-1 font-light">
+            <li>Type: Wireless gaming controller</li>
+            <li>Design: Ergonomic, asymmetric grip layout</li>
+            <li>Build: Matte black body with textured anti-slip grips</li>
           </ul>
         </div>
-      )}
 
-      {/* Product Features */}
-      {product?.features?.length > 0 && (
+        {/* Features */}
         <div>
-          <h3 className="text-sm font-semibold text-zinc-300 mb-2">
+          <h3 className="text-sm font-semibold text-zinc-300 mb-1.5">
             Product Features
           </h3>
-          <ul className="list-disc list-inside text-sm text-zinc-400 space-y-1">
-            {product.features.map((feature, idx) => (
-              <li key={idx}>{feature}</li>
-            ))}
+          <ul className="list-disc list-inside text-sm text-zinc-400 space-y-1 font-light">
+            <li>Ergonomic Comfort</li>
+            <li>Precision Control</li>
+            <li>Modern Gaming Aesthetic</li>
           </ul>
         </div>
-      )}
+      </div>
 
-      {/* CTA Button */}
-      <button className="w-full bg-[#A71EDB] hover:bg-[#9333ea] text-white py-3.5 rounded-lg font-medium transition-all shadow-lg shadow-purple-500/20 active:scale-[0.99] mt-4 cursor-pointer">
-        Go To Checkout &rarr;
-      </button>
+      {/* Bottom CTA Button */}
+      <div className="pt-4">
+        <button className="w-full bg-[#A71EDB] hover:bg-[#8B00CC] text-white py-4 rounded-xl font-medium text-base tracking-wide transition-all duration-300 border border-transparent hover:border-purple-500/20 active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2 group">
+          <span>Go To Checkout</span>
+          <span className="transition-transform duration-300 group-hover:translate-x-1">
+            &rarr;
+          </span>
+        </button>
+      </div>
     </div>
   );
 }
