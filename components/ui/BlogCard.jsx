@@ -1,17 +1,21 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function BlogCard({ blog, isActive, onCardClick }) {
+  // Agar onCardClick pass hua hai toh wo chalaye, warna standard Link follow ho
+  const blogSlugOrId = blog.slug || blog.id || "1";
+
   return (
-    <div
+    <Link
+      href={`/blogs/${blogSlugOrId}`}
       onClick={onCardClick}
-      // 🛠️ FIX: Blue border aur dynamic glow hata diya hai. Ab border bilkul subtle aur uniform rahega jaisa screenshot mein hai
-      className={`w-full max-w-[620px] h-auto sm:h-[138px] p-4 bg-[#050505] rounded-[14px] border border-zinc-900/80 hover:border-zinc-800 transition-all duration-300 flex flex-col sm:flex-row gap-4 items-center cursor-pointer select-none`}
+      className={`w-full max-w-[620px] h-auto sm:h-[138px] p-4 bg-[#050505] rounded-[14px] border border-zinc-900/80 hover:border-zinc-800 transition-all duration-300 flex flex-col sm:flex-row gap-4 items-center cursor-pointer select-none block`}
     >
       {/* Blog Left Image Container */}
       <div className="relative w-full sm:w-[150px] h-[106px] rounded-[10px] overflow-hidden flex-shrink-0 bg-zinc-900">
         <Image
           src={blog.image || "/assets/blog-placeholder.png"}
-          alt={blog.title}
+          alt={blog.title || "Blog Image"}
           fill
           className="object-cover pointer-events-none"
         />
@@ -35,6 +39,6 @@ export default function BlogCard({ blog, isActive, onCardClick }) {
           </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
