@@ -2,6 +2,8 @@ import React from "react";
 import Image from "next/image";
 
 export default function BlogDetailHero({ blog }) {
+  const heroImage = blog?.image?.trim() || "/assets/heroSectionBg.png";
+
   return (
     <section className="w-full bg-[#050505] text-white pt-12 pb-6 px-4 sm:px-6">
       <div className="max-w-[1100px] mx-auto text-center flex flex-col items-center">
@@ -26,7 +28,7 @@ export default function BlogDetailHero({ blog }) {
         {/* Main Banner Image Container */}
         <div className="relative w-full h-[300px] sm:h-[450px] md:h-[550px] rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-900">
           <Image
-            src={blog?.image || "/assets/heroSectionBg.png"}
+            src={heroImage}
             alt={blog?.title || "Blog detail banner"}
             fill
             priority

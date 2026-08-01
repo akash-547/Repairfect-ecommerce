@@ -8,7 +8,7 @@ export default function BlogDetails({ id }) {
     id: id,
     title: "Figma ipsum component variant main layer. Comment scale list.",
     description: "Figma ipsum component variant main layer. Asset frame arrange effect figma. Vector community pen horizontal variant.",
-    image: "/assets/blog-detail-banner.png",
+    image: "/assets/heroSectionBg.png",
     category: "Blog",
     date: "28 July, 2026",
     readTime: "10 min"
