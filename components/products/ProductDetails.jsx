@@ -1,10 +1,21 @@
 "use client";
 
 import { useState } from "react";
+import { FiShoppingCart } from "react-icons/fi";
+import { useCart } from "@/context/CartContext"; // Path apne folder ke mutabiq adjust karein
 
 export default function ProductDetails({ product }) {
   const defaultColor = product?.colors?.[0] || "White";
   const [selectedColor, setSelectedColor] = useState(defaultColor);
+  const { addToCart } = useCart(); // Context se function liya
+
+  const handleAddToCart = () => {
+    const itemToCart = {
+      ...product,
+      selectedColor,
+    };
+    addToCart(itemToCart);
+  };
 
   return (
     <div className="flex flex-col justify-between h-[705px] w-full select-none bg-transparent py-2 px-3">
@@ -82,9 +93,19 @@ export default function ProductDetails({ product }) {
         </div>
       </div>
 
-      {/* Bottom CTA Button */}
-      <div className="pt-4">
-        <button className="w-full bg-[#A71EDB] hover:bg-[#8B00CC] text-white py-4 rounded-xl font-medium text-base tracking-wide transition-all duration-300 border border-transparent hover:border-purple-500/20 active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2 group">
+      {/* Bottom CTA Buttons Container */}
+      <div className="pt-4 flex items-center gap-3">
+        {/* 1. Add to Cart Button */}
+        <button
+          onClick={handleAddToCart}
+          className="flex-1 bg-[#A71EDB] hover:bg-[#8B00CC] text-white py-4 rounded-xl font-medium text-sm sm:text-base tracking-wide transition-all duration-300 border border-transparent hover:border-purple-500/20 active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2 group"
+        >
+          <FiShoppingCart className="text-lg transition-transform duration-300 group-hover:scale-110" />
+          <span>Add to Cart</span>
+        </button>
+
+        {/* 2. Go To Checkout Button */}
+        <button className="flex-1 bg-[#A71EDB] hover:bg-[#8B00CC] text-white py-4 rounded-xl font-medium text-sm sm:text-base tracking-wide transition-all duration-300 border border-transparent hover:border-purple-500/20 active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2 group">
           <span>Go To Checkout</span>
           <span className="transition-transform duration-300 group-hover:translate-x-1">
             &rarr;

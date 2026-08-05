@@ -3,9 +3,12 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Container from "../shared/Container";
+import { FiShoppingCart } from "react-icons/fi";
+import { useCart } from "@/context/CartContext";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { cartCount } = useCart(); // Cart Context se active items ka count
 
   return (
     <>
@@ -70,6 +73,20 @@ export default function Navbar() {
                 </Link>
               </div>
 
+              {/* Cart Icon with Live Count Badge */}
+              <Link
+                href="/cart"
+                className="relative text-zinc-300 hover:text-[#A71EDB] transition-all group shrink-0 p-1"
+                aria-label="Shopping Cart"
+              >
+                <FiShoppingCart className="w-[22px] h-[22px] transition-transform duration-300 group-hover:scale-110" />
+                {cartCount > 0 && (
+                  <span className="absolute -top-1.5 -right-2 bg-[#A71EDB] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center animate-pulse border border-[#130620]">
+                    {cartCount}
+                  </span>
+                )}
+              </Link>
+
               {/* Profile Sign In */}
               <Link
                 href="/signin"
@@ -95,42 +112,59 @@ export default function Navbar() {
               </Link>
             </div>
 
-            {/* Mobile Hamburger Button Trigger */}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden p-2 text-zinc-300 hover:text-white focus:outline-none transition-colors duration-200 z-50 cursor-pointer"
-              aria-label="Toggle Menu"
-            >
-              {isOpen ? (
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              )}
-            </button>
+            {/* Mobile View Right Controls (Cart + Hamburger) */}
+            <div className="flex items-center gap-4 lg:hidden">
+              {/* Mobile Cart Icon */}
+              <Link
+                href="/cart"
+                className="relative text-zinc-300 hover:text-[#A71EDB] p-1"
+                aria-label="Shopping Cart"
+              >
+                <FiShoppingCart className="w-6 h-6" />
+                {cartCount > 0 && (
+                  <span className="absolute -top-1.5 -right-2 bg-[#A71EDB] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center animate-pulse border border-[#130620]">
+                    {cartCount}
+                  </span>
+                )}
+              </Link>
+
+              {/* Mobile Hamburger Button Trigger */}
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="p-2 text-zinc-300 hover:text-white focus:outline-none transition-colors duration-200 z-50 cursor-pointer"
+                aria-label="Toggle Menu"
+              >
+                {isOpen ? (
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  </svg>
+                )}
+              </button>
+            </div>
           </div>
         </Container>
       </nav>
@@ -188,6 +222,23 @@ export default function Navbar() {
           </Link>
 
           <div className="h-[1px] bg-zinc-800 my-1" />
+
+          {/* Mobile Cart Option */}
+          <Link
+            href="/cart"
+            onClick={() => setIsOpen(false)}
+            className="flex items-center justify-between text-zinc-300 hover:text-[#A71EDB] text-lg font-normal transition-colors"
+          >
+            <div className="flex items-center gap-2">
+              <FiShoppingCart className="w-5 h-5" />
+              <span>Cart</span>
+            </div>
+            {cartCount > 0 && (
+              <span className="bg-[#A71EDB] text-white text-xs px-2 py-0.5 rounded-full font-bold">
+                {cartCount}
+              </span>
+            )}
+          </Link>
 
           <Link
             href="/signin"

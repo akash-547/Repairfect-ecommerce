@@ -2,6 +2,7 @@ import Navbar from '@/components/layouts/Navbar';
 import Footer from '@/components/layouts/Footer';
 import '@/app/globals.css';
 import { Poppins } from 'next/font/google';
+import { CartProvider } from '@/context/CartContext'; // 👈 1. Import Add Karein
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -13,9 +14,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={poppins.variable} suppressHydrationWarning>
       <body className={`${poppins.className} font-poppins text-white antialiased`} suppressHydrationWarning>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        {/* 👈 2. CartProvider Wrap Karein */}
+        <CartProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );
