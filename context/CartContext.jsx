@@ -1,34 +1,40 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, useMemo, useCallback } from "react";
 
 const CartContext = createContext(undefined);
 
 export function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
+  const [isHydrated, setIsHydrated] = useState(false);
 
-  // 1. LocalStorage Se Load Karein (Initial Mount)
   useEffect(() => {
     try {
       const savedCart = localStorage.getItem("repairfect_cart");
       if (savedCart) {
-        setCartItems(JSON.parse(savedCart));
+        const parsedCart = JSON.parse(savedCart);
+        if (Array.isArray(parsedCart)) {
+          setCartItems(parsedCart);
+        }
       }
     } catch (error) {
       console.error("LocalStorage load error:", error);
+    } finally {
+      setIsHydrated(true);
     }
   }, []);
 
-  // 2. LocalStorage Mein Save Karein Jab BHI state Change ho
   useEffect(() => {
+    if (!isHydrated) return;
+
     try {
       localStorage.setItem("repairfect_cart", JSON.stringify(cartItems));
     } catch (error) {
       console.error("LocalStorage save error:", error);
     }
-  }, [cartItems]);
+  }, [cartItems, isHydrated]);
 
-  const addToCart = (product) => {
+  const addToCart = useCallback((product) => {
     setCartItems((prevItems) => {
       const existingIndex = prevItems.findIndex(
         (item) => item.id === product.id && item.selectedColor === product.selectedColor
@@ -36,55 +42,49 @@ export function CartProvider({ children }) {
 
       if (existingIndex > -1) {
         const updated = [...prevItems];
-        updated[existingIndex].quantity = (updated[existingIndex].quantity || 1) + 1;
+        updated[existingIndex] = {
+          ...updated[existingIndex],
+          quantity: (updated[existingIndex].quantity || 1) + 1,
+        };
         return updated;
       }
 
       return [...prevItems, { ...product, price: product.price || 60, quantity: 1 }];
     });
-  };
+  }, []);
 
-  const decreaseQuantity = (id, selectedColor) => {
+  const decreaseQuantity = useCallback((id, selectedColor) => {
     setCartItems((prevItems) =>
       prevItems
         .map((item) => {
           if (item.id === id && item.selectedColor === selectedColor) {
-            return { ...item, quantity: item.quantity - 1 };
+            return { ...item, quantity: Math.max((item.quantity || 1) - 1, 0) };
           }
           return item;
         })
         .filter((item) => item.quantity > 0)
     );
-  };
+  }, []);
 
-  const removeFromCart = (id, selectedColor) => {
+  const removeFromCart = useCallback((id, selectedColor) => {
     setCartItems((prevItems) =>
-      prevItems.filter(
-        (item) => !(item.id === id && item.selectedColor === selectedColor)
-      )
+      prevItems.filter((item) => !(item.id === id && item.selectedColor === selectedColor))
     );
-  };
+  }, []);
 
-  const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-  const totalPrice = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
+  const value = useMemo(
+    () => ({
+      cartItems,
+      addToCart,
+      decreaseQuantity,
+      removeFromCart,
+      cartCount: cartItems.reduce((acc, item) => acc + (item.quantity || 0), 0),
+      totalPrice: cartItems.reduce((acc, item) => acc + (item.price || 0) * (item.quantity || 0), 0),
+    }),
+    [cartItems, addToCart, decreaseQuantity, removeFromCart]
   );
 
-  return (
-    <CartContext.Provider
-      value={{
-        cartItems,
-        addToCart,
-        decreaseQuantity,
-        removeFromCart,
-        cartCount,
-        totalPrice,
-      }}
-    >
-      {children}
-    </CartContext.Provider>
-  );
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
 
 export const useCart = () => {

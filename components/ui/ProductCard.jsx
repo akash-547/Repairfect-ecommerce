@@ -4,6 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function ProductCard({ product, isActive, onCardClick }) {
+  const cardTitle = product?.title || "Product";
+  const cardPrice = product?.price || "$0";
+  const cardImage = product?.imageSrc || "/assets/logo.png";
+  const cardDescription = product?.description || "Premium product";
+
   return (
     <Link
       href={`/products/${product.id}`}
@@ -17,16 +22,16 @@ export default function ProductCard({ product, isActive, onCardClick }) {
       {/* Top: Price & Image */}
       <div className="w-full flex flex-col relative">
         <div className="self-end rounded-full bg-zinc-800/50 backdrop-blur-md px-2.5 py-1 text-[11px] font-thin tracking-wide text-zinc-300">
-          {product.price}
+          {cardPrice}
         </div>
         <div className="w-full h-[160px] relative flex items-center justify-center mt-2 transition-transform duration-300 group-hover:scale-105">
           <Image
-            src={product.imageSrc}
-            alt={product.title}
+            src={cardImage}
+            alt={cardTitle}
             width={180}
             height={140}
             className="object-contain drop-shadow-[0_15px_15px_rgba(0,0,0,0.7)]"
-            priority={product.id <= 6}
+            priority={Number(product?.id) <= 6}
           />
         </div>
       </div>
@@ -34,11 +39,11 @@ export default function ProductCard({ product, isActive, onCardClick }) {
       {/* Bottom: Title, Description & Action Button */}
       <div className="w-full flex flex-col mt-4">
         <h3 className="font-inter font-normal text-[16px] text-white tracking-wide mb-1.5">
-          {product.title}
+          {cardTitle}
         </h3>
 
         <p className="font-inter font-thin antialiased text-[12px] leading-[16px] text-zinc-400 opacity-70 line-clamp-2">
-          {product.description}
+          {cardDescription}
         </p>
 
         {/* Hover / Active State Action Button */}
