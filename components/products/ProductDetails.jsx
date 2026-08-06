@@ -1,20 +1,33 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation"; // 👈 1. Router Import Kiya
 import { FiShoppingCart } from "react-icons/fi";
-import { useCart } from "@/context/CartContext"; // Path apne folder ke mutabiq adjust karein
+import { useCart } from "@/context/CartContext";
 
 export default function ProductDetails({ product }) {
+  const router = useRouter(); // 👈 2. Router Hook
   const defaultColor = product?.colors?.[0] || "White";
   const [selectedColor, setSelectedColor] = useState(defaultColor);
-  const { addToCart } = useCart(); // Context se function liya
+  const { addToCart } = useCart();
 
+  // 🛒 Add to Cart Handler
   const handleAddToCart = () => {
     const itemToCart = {
       ...product,
+      id: product?.id || 1, // Unique ID guarantee
+      title: product?.title || "The X-Force Elite Controller",
+      price: product?.price || 60,
+      image: product?.image || "/assets/logo.png",
       selectedColor,
     };
     addToCart(itemToCart);
+  };
+
+  // 🚀 Go To Checkout Handler (Add + Redirect to /cart)
+  const handleGoToCheckout = () => {
+    handleAddToCart(); // Add to Context
+    router.push("/cart"); // Direct Cart Page par bhejna
   };
 
   return (
@@ -100,12 +113,15 @@ export default function ProductDetails({ product }) {
           onClick={handleAddToCart}
           className="flex-1 bg-[#A71EDB] hover:bg-[#8B00CC] text-white py-4 rounded-xl font-medium text-sm sm:text-base tracking-wide transition-all duration-300 border border-transparent hover:border-purple-500/20 active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2 group"
         >
-          <FiShoppingCart className="text-lg transition-transform duration-300 group-hover:scale-110" />
           <span>Add to Cart</span>
+          <FiShoppingCart className="text-lg transition-transform duration-300 group-hover:scale-110" />
         </button>
 
         {/* 2. Go To Checkout Button */}
-        <button className="flex-1 bg-[#A71EDB] hover:bg-[#8B00CC] text-white py-4 rounded-xl font-medium text-sm sm:text-base tracking-wide transition-all duration-300 border border-transparent hover:border-purple-500/20 active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2 group">
+        <button
+          onClick={handleGoToCheckout} // 👈 Handler Connected
+          className="flex-1 bg-[#A71EDB] hover:bg-[#8B00CC] text-white py-4 rounded-xl font-medium text-sm sm:text-base tracking-wide transition-all duration-300 border border-transparent hover:border-purple-500/20 active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2 group"
+        >
           <span>Go To Checkout</span>
           <span className="transition-transform duration-300 group-hover:translate-x-1">
             &rarr;
