@@ -9,19 +9,27 @@ export function CartProvider({ children }) {
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
+    let isMounted = true;
+
     try {
       const savedCart = localStorage.getItem("repairfect_cart");
       if (savedCart) {
         const parsedCart = JSON.parse(savedCart);
-        if (Array.isArray(parsedCart)) {
+        if (Array.isArray(parsedCart) && isMounted) {
           setCartItems(parsedCart);
         }
       }
     } catch (error) {
       console.error("LocalStorage load error:", error);
     } finally {
-      setIsHydrated(true);
+      if (isMounted) {
+        setIsHydrated(true);
+      }
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   useEffect(() => {

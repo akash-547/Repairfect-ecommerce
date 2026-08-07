@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
-  reactCompiler: true,
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'react-icons'],
+  },
+  allowedDevOrigins: ['127.0.0.1', 'localhost'],
 };
 
 export default nextConfig;

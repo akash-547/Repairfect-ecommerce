@@ -13,11 +13,13 @@ const poppins = Poppins({
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={poppins.variable} suppressHydrationWarning>
-      <body className={`${poppins.className} font-poppins text-white antialiased`} suppressHydrationWarning>
-        {/* 👈 2. CartProvider Wrap Karein */}
+      <body
+        className={`${poppins.className} min-h-screen bg-[#050505] font-poppins text-white antialiased`}
+        suppressHydrationWarning
+      >
         <CartProvider>
           <Navbar />
-          <main>{children}</main>
+          <main className="min-h-screen bg-[#050505]">{children}</main>
           <Footer />
         </CartProvider>
       </body>

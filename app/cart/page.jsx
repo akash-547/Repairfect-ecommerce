@@ -3,7 +3,7 @@ import CartView from "@/features/cart";
 
 export default function CartPage() {
   return (
-    <main className="min-h-screen bg-[#050505]">
+    <div className="min-h-screen w-full bg-[#050505] text-white">
       <Suspense
         fallback={
           <div className="flex min-h-screen items-center justify-center bg-[#050505] px-4 text-center text-zinc-300">
@@ -13,6 +13,6 @@ export default function CartPage() {
       >
         <CartView />
       </Suspense>
-    </main>
+    </div>
   );
 }
