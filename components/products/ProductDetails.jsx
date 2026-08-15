@@ -1,21 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation"; // 👈 1. Router Import Kiya
+import { useRouter } from "next/navigation";
 import { FiShoppingCart } from "react-icons/fi";
 import { useCart } from "@/context/CartContext";
 
 export default function ProductDetails({ product }) {
-  const router = useRouter(); // 👈 2. Router Hook
+  const router = useRouter();
   const defaultColor = product?.colors?.[0] || "White";
   const [selectedColor, setSelectedColor] = useState(defaultColor);
   const { addToCart } = useCart();
 
-  // 🛒 Add to Cart Handler
+  // 🛒 Add to Cart Handler (Cart Count sirf isse update hoga)
   const handleAddToCart = () => {
     const itemToCart = {
       ...product,
-      id: product?.id || 1, // Unique ID guarantee
+      id: product?.id || 1,
       title: product?.title || "The X-Force Elite Controller",
       price: product?.price || 60,
       image: product?.image || "/assets/logo.png",
@@ -24,10 +24,9 @@ export default function ProductDetails({ product }) {
     addToCart(itemToCart);
   };
 
-  // 🚀 Go To Checkout Handler (Add + Redirect to /cart)
+  // 🚀 Go To Checkout Handler (Sirf Cart Page par Redirect karega)
   const handleGoToCheckout = () => {
-    handleAddToCart(); // Add to Context
-    router.push("/cart"); // Direct Cart Page par bhejna
+    router.push("/cart");
   };
 
   return (
@@ -108,7 +107,7 @@ export default function ProductDetails({ product }) {
 
       {/* Bottom CTA Buttons Container */}
       <div className="pt-4 flex items-center gap-3">
-        {/* 1. Add to Cart Button */}
+        {/* 1. Add to Cart Button (Add Karega) */}
         <button
           onClick={handleAddToCart}
           className="flex-1 bg-[#A71EDB] hover:bg-[#8B00CC] text-white py-4 rounded-xl font-medium text-sm sm:text-base tracking-wide transition-all duration-300 border border-transparent hover:border-purple-500/20 active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2 group"
@@ -117,9 +116,9 @@ export default function ProductDetails({ product }) {
           <FiShoppingCart className="text-lg transition-transform duration-300 group-hover:scale-110" />
         </button>
 
-        {/* 2. Go To Checkout Button */}
+        {/* 2. Go To Checkout Button (Only Redirect Karega) */}
         <button
-          onClick={handleGoToCheckout} // 👈 Handler Connected
+          onClick={handleGoToCheckout}
           className="flex-1 bg-[#A71EDB] hover:bg-[#8B00CC] text-white py-4 rounded-xl font-medium text-sm sm:text-base tracking-wide transition-all duration-300 border border-transparent hover:border-purple-500/20 active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2 group"
         >
           <span>Go To Checkout</span>
