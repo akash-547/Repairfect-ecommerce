@@ -22,7 +22,7 @@ export default function CartSection() {
     <div className="flex w-full flex-col items-start justify-between gap-10 lg:flex-row lg:gap-12">
       {/* LEFT COLUMN: CART ITEMS LIST */}
       <div className="w-full min-w-0 lg:flex-1">
-        <div className="rounded-[24px] border border-zinc-800/80 bg-[#080808]/80 p-4 sm:p-6">
+        <div className="rounded-[24px]  bg-[#080808]/80 p-4 sm:p-6">
           <div className="divide-y divide-zinc-800/80 border-b border-zinc-800/80">
             {cartItems && cartItems.length > 0 ? (
               cartItems.map((item, index) => {
