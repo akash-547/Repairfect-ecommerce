@@ -1,7 +1,8 @@
 "use client";
+
 import React from "react";
 import SectionBadge from "@/components/ui/SectionBadge";
-import Container from "@/components/shared/Container"; // Aapka standard Navbar/Layout Container
+import Container from "@/components/shared/Container";
 import BlogBanner from "./components/BlogBanner";
 import BlogsCards from "./components/BlogsCards";
 
@@ -48,9 +49,7 @@ export default function BlogsFeature() {
 
       {/* Shared Container with Navbar alignment setup */}
       <Container>
-        {/* 🛠️ FIXED: Removed -mt-12 and added mt-[40px] for clean spacing */}
         <div className="max-w-[1200px] mx-auto px-4 w-full mt-[40px] relative z-10 flex flex-col items-center text-center">
-          
           {/* Section Badge */}
           <SectionBadge text="Blogs" />
 
@@ -66,17 +65,12 @@ export default function BlogsFeature() {
             basic. Icon export frame undo continuity undo arrow.
           </p>
 
-          {/* Dynamic Cards Stack - Full Width (1200px alignment) */}
+          {/* Dynamic Cards Stack */}
           <div className="w-full flex flex-col items-center gap-4 sm:gap-5">
             {BLOGS_DATA.map((blog) => (
-              <BlogsCards
-                key={blog.id}
-                blog={blog}
-                onCardClick={() => console.log(`Blog ${blog.id} clicked`)}
-              />
+              <BlogsCards key={blog.id} blog={blog} />
             ))}
           </div>
-
         </div>
       </Container>
     </div>
