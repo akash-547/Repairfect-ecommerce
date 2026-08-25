@@ -12,15 +12,14 @@ export default function Navbar() {
 
   return (
     <>
-      {/* 1. Main Navbar Header Block */}
-      {/* Navbar line change inside Navbar.jsx */}
+      {/* 1. Main Navbar Header Block (Original styles untouched) */}
       <nav className="w-full h-[100px] bg-transparent pt-6 z-50 flex items-center shadow-none select-none relative">
         <Container>
-          <div className="max-w-[1200px] mx-auto flex items-center justify-between lg:justify-start px-4 w-full">
+          <div className="max-w-[1200px] mx-auto flex items-center justify-between xl:justify-start px-5 w-full">
             {/* Brand Logo */}
             <Link
               href="/"
-              className="flex items-center transition-transform active:scale-98 shrink-0"
+              className="flex  items-center transition-transform active:scale-98 shrink-0"
             >
               <Image
                 src="/assets/logo.png"
@@ -33,7 +32,7 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop View Elements */}
-            <div className="hidden lg:flex items-center gap-[22px] ml-[248px]">
+            <div className="hidden xl:flex items-center gap-[22px] ml-auto xl:ml-[248px]">
               {/* Center Navigation Pill */}
               <div className="flex items-center bg-[#130620]/80 backdrop-blur-xl rounded-md border border-purple-500/10 shadow-[0_4px_20px_rgba(0,0,0,0.4)] pt-[15px] pb-[15px] pl-[28px] pr-[28px] gap-[46px]">
                 <Link
@@ -50,7 +49,6 @@ export default function Navbar() {
                   About Us
                 </Link>
 
-                {/* 🛠️ FIXED: Added '/' before anchors for multi-page safe routing */}
                 <Link
                   href="/repair"
                   className="text-zinc-300 hover:text-[#A71EDB] font-normal transition-colors text-[16px] leading-[100%] tracking-[0%]"
@@ -112,8 +110,8 @@ export default function Navbar() {
               </Link>
             </div>
 
-            {/* Mobile View Right Controls (Cart + Hamburger) */}
-            <div className="flex items-center gap-4 lg:hidden">
+            {/* Mobile / Tablet Right Controls (Cart + Hamburger) */}
+            <div className="flex items-center gap-4 xl:hidden">
               {/* Mobile Cart Icon */}
               <Link
                 href="/cart"
@@ -131,7 +129,7 @@ export default function Navbar() {
               {/* Mobile Hamburger Button Trigger */}
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-2 text-zinc-300 hover:text-white focus:outline-none transition-colors duration-200 z-50 cursor-pointer"
+                className="p-2 text-zinc-300 hover:text-white focus:outline-none transition-colors duration-200 cursor-pointer"
                 aria-label="Toggle Menu"
               >
                 {isOpen ? (
@@ -169,16 +167,23 @@ export default function Navbar() {
         </Container>
       </nav>
 
-      {/* 2. Mobile Responsive Dropdown Slide Panel Layout */}
+      {/* 2. Mobile / Tablet Responsive Dropdown Drawer */}
       <div
-        className={`fixed inset-0 z-40 lg:hidden transition-opacity duration-300 ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+        className={`fixed inset-0 z-40 xl:hidden transition-opacity duration-300 ${
+          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
       >
+        {/* Dark Backdrop */}
         <div
           className="absolute inset-0 bg-black/60 backdrop-blur-sm"
           onClick={() => setIsOpen(false)}
         />
+        
+        {/* Animated Dropdown Menu */}
         <div
-          className={`absolute top-[100px] left-0 w-full bg-[#130620] border-b border-purple-500/10 p-6 flex flex-col gap-5 transform transition-transform duration-300 ${isOpen ? "translate-y-0" : "-translate-y-full"}`}
+          className={`absolute top-[100px] left-0 w-full bg-[#130620] border-b border-purple-500/20 p-6 flex flex-col gap-5 transform transition-transform duration-300 ease-in-out ${
+            isOpen ? "translate-y-0" : "-translate-y-full"
+          }`}
         >
           <Link
             href="/"
@@ -196,9 +201,8 @@ export default function Navbar() {
             About Us
           </Link>
 
-          {/* 🛠 dependency fix for mobile anchor tags */}
           <Link
-            href="/#repair"
+            href="/repair"
             onClick={() => setIsOpen(false)}
             className="text-zinc-300 hover:text-[#A71EDB] text-lg font-normal tracking-wide transition-colors"
           >
@@ -206,7 +210,7 @@ export default function Navbar() {
           </Link>
 
           <Link
-            href="/#products"
+            href="/products"
             onClick={() => setIsOpen(false)}
             className="text-zinc-300 hover:text-[#A71EDB] text-lg font-normal tracking-wide transition-colors"
           >
@@ -214,7 +218,7 @@ export default function Navbar() {
           </Link>
 
           <Link
-            href="/#blogs"
+            href="/blogs"
             onClick={() => setIsOpen(false)}
             className="text-zinc-300 hover:text-[#A71EDB] text-lg font-normal tracking-wide transition-colors"
           >
@@ -222,23 +226,6 @@ export default function Navbar() {
           </Link>
 
           <div className="h-[1px] bg-zinc-800 my-1" />
-
-          {/* Mobile Cart Option */}
-          <Link
-            href="/cart"
-            onClick={() => setIsOpen(false)}
-            className="flex items-center justify-between text-zinc-300 hover:text-[#A71EDB] text-lg font-normal transition-colors"
-          >
-            <div className="flex items-center gap-2">
-              <FiShoppingCart className="w-5 h-5" />
-              <span>Cart</span>
-            </div>
-            {cartCount > 0 && (
-              <span className="bg-[#A71EDB] text-white text-xs px-2 py-0.5 rounded-full font-bold">
-                {cartCount}
-              </span>
-            )}
-          </Link>
 
           <Link
             href="/signin"
