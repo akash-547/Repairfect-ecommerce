@@ -23,12 +23,12 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0d0414] text-white flex items-center justify-center py-12 px-4 relative overflow-hidden">
+    <div className="min-h-screen  text-white flex items-center justify-center py-12 px-4 relative overflow-hidden">
       {/* Background Glow Overlay */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#A71EDB]/15 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none" />
 
       <Container>
-        <div className="max-w-[450px] mx-auto bg-[#130620]/90 backdrop-blur-xl border border-purple-500/20 rounded-2xl p-8 shadow-[0_10px_30px_rgba(0,0,0,0.5)] relative z-10">
+        <div className="max-w-[450px] mx-auto backdrop-blur-xl border border-purple-500/20 rounded-2xl p-8 shadow-[0_10px_30px_rgba(0,0,0,0.5)] relative z-10">
           
           {/* Logo & Header */}
           <div className="flex flex-col items-center text-center mb-8">
@@ -123,7 +123,7 @@ export default function SignInPage() {
           <div className="mt-6 text-center text-sm text-zinc-400">
             Don't have an account?{" "}
             <Link
-              href="/signup"
+              href=""
               className="text-[#A71EDB] font-medium hover:underline"
             >
               Sign Up
